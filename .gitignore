@@ -1,3 +1,5 @@
 /env
 /usermanager/usermanager/__pycache__
 /usermanager/users/__pycache__
+/node_modules
+/usermanager/frontend/__pycache__
