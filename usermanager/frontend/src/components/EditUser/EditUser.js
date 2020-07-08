@@ -56,7 +56,7 @@ class EditUser extends React.Component {
           />
           <input
             type="text"            
-            value = {this.state.emai  l}
+            value = {this.state.email}
             className="form-control"
             onChange={this.getEmail}
           />
