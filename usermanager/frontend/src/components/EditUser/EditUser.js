@@ -27,19 +27,20 @@ class EditUser extends React.Component {
     });
   };
 
-  onSendData = () => {  
-
-    fetch("http://localhost:8000/api/users/" + this.props.data.id, {
+  onSendData = (event) => {  
+    // event.preventDefault();
+    fetch("http://localhost:8000/api/users/" ,{
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Accept : "application/json",
       },
       body: JSON.stringify({
+        id: this.props.id,
         name: this.state.name,
         email: this.state.email,
         message: this.state.message,
-      }),
+      }),      
     }).catch((err) => console.log(err.message));     
   };
 
