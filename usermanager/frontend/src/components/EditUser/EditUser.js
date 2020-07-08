@@ -45,14 +45,13 @@ class EditUser extends React.Component {
   };
 
   render() {
-    console.log("Props =>", this.props);
-    const { id, name, email, message } = this.state;
+    console.log("Props =>", this.props);    
     return (
       <div className="AddUser">
         <form onSubmit={this.onSendData}>
           <input
             type="text"
-            placeholder={this.props.name}
+            placeholder={this.props.data[0].name}
             className="form-control"
             onChange={this.getName}
           />
