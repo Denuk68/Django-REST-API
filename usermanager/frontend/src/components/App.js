@@ -8,7 +8,6 @@ import UsersList from "../components/usersList/UsersList";
 import NotFound from "../components/NotFound/NotFound";
 import AddUser from "../components/AddUser/AddUser";
 import EditUser from "../components/EditUser/EditUser";
-import { element } from "prop-types";
 
 class App extends React.Component {
   apiURL = "http://localhost:8000/api/users/";
@@ -45,19 +44,16 @@ class App extends React.Component {
       .catch((err) => console.log(err.message));
   };
 
-  onEditItem = (id) => {   
+  onEditItem = (id) => {
     const index = this.state.UsersList.findIndex(
       (element) => element.id === id
     );  
-    const partOne = this.state.UsersList.slice(0,index)
-    const partTwo = this.state.UsersList.slice(index + 1)
-    const singleUser = [... partOne, ... partTwo]
-
+    const singleUser = this.state.UsersList[index];
     this.setState({ data: singleUser });
   };
 
-  render() {   
-    console.log(this.state.data)
+  render() {
+    // console.log("data => ", this.state.data)
     return (
       <Fragment>
         <Router>

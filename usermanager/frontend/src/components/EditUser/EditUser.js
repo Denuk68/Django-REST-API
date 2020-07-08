@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 class EditUser extends React.Component {
   state = {
-    id: this.props.id,
-    name: this.props.name,
-    email: this.props.email,
-    message: this.props.message,
+    id: this.props.data.id,
+    name: this.props.data.name,
+    email: this.props.data.email,
+    message: this.props.data.message,
   };
 
   getName = (event) => {
@@ -27,44 +27,43 @@ class EditUser extends React.Component {
     });
   };
 
-  onSendData = (event) => {
-    fetch("http://localhost:8000/api/users/", {
+  onSendData = () => {  
+
+    fetch("http://localhost:8000/api/users/" + this.props.data.id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        Accept : "application/json",
       },
       body: JSON.stringify({
         name: this.state.name,
         email: this.state.email,
         message: this.state.message,
       }),
-    }).catch((err) => console.log(err.message));
-
-    alert(this.state.name + " було змінено !");
+    }).catch((err) => console.log(err.message));     
   };
 
-  render() {
-    console.log("Props =>", this.props);    
+  render() {     
+    // console.log("Props =>", this.props);     
     return (
       <div className="AddUser">
         <form onSubmit={this.onSendData}>
           <input
-            type="text"
-            placeholder={this.props.data[0].name}
+            type="text"                        
             className="form-control"
+            value = {this.state.name}
             onChange={this.getName}
           />
           <input
-            type="text"
-            placeholder="Email"
+            type="text"            
+            value = {this.state.emai  l}
             className="form-control"
             onChange={this.getEmail}
           />
           <textarea
             maxLength="600"
             type="text"
-            placeholder="Message"
+            value={this.state.message}
             className="form-control"
             onChange={this.getMessage}
           />
