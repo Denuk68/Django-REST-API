@@ -11,8 +11,6 @@ import EditUser from "../components/EditUser/EditUser";
 
 class App extends React.Component {
   apiURL = "http://localhost:8000/api/users/";
-  api = "";
-  contact = {};
   state = {
     UsersList: [],
   };
@@ -54,14 +52,6 @@ class App extends React.Component {
         console.log(response);
       })
       .catch((err) => console.log(err.message));
-
-    let res = this.state.List;
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].id == id) {
-        this.contact = res[i];
-      }
-    }
-    this.api = this.apiURL + id;
   };
 
   render() {
@@ -85,14 +75,7 @@ class App extends React.Component {
             <Route
               path="/EditUser"
               exact
-              render={() => (
-                <EditUser
-                  UsersList={this.state.UsersList}
-                  updateService={this.updateService}
-                  contact={this.contact}
-                  api={this.api}
-                />
-              )}
+              render={() => <EditUser UsersList={this.state.UsersList} />}
             />
             <Route path="*" exact render={() => <NotFound />} />
           </Switch>
