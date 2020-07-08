@@ -6,7 +6,7 @@ class EditUser extends React.Component {
     id: this.props.id,
     name: this.props.name,
     email: this.props.email,
-    message: this.props.message,  
+    message: this.props.message,
   };
 
   getName = (event) => {
@@ -44,13 +44,15 @@ class EditUser extends React.Component {
     alert(this.state.name + " було змінено !");
   };
 
-  render() {    
+  render() {
+    console.log("Props =>", this.props);
+    const { id, name, email, message } = this.state;
     return (
       <div className="AddUser">
         <form onSubmit={this.onSendData}>
           <input
             type="text"
-            placeholder="Name"
+            placeholder={this.props.name}
             className="form-control"
             onChange={this.getName}
           />
@@ -68,7 +70,7 @@ class EditUser extends React.Component {
             onChange={this.getMessage}
           />
           <button className="btn btn-success" type="submit">
-            Change  user
+            Change user
           </button>
         </form>
         <Link to="/" className="btn btn-link">

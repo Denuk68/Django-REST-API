@@ -13,6 +13,7 @@ class App extends React.Component {
   apiURL = "http://localhost:8000/api/users/";
   state = {
     UsersList: [],
+    data: [],
   };
 
   componentDidMount() {
@@ -44,14 +45,8 @@ class App extends React.Component {
   };
 
   onEditItem = (id) => {
-    fetch(this.apiURL + id, {
-      method: "GET",
-    })
-      .then((response) => {
-        this.updateService();
-        console.log(response);
-      })
-      .catch((err) => console.log(err.message));
+    console.log("My id =", id);
+    console.log(this.state);
   };
 
   render() {
@@ -75,7 +70,7 @@ class App extends React.Component {
             <Route
               path="/EditUser"
               exact
-              render={() => <EditUser UsersList={this.state.UsersList} />}
+              render={() => <EditUser data={this.state.data} />}
             />
             <Route path="*" exact render={() => <NotFound />} />
           </Switch>
