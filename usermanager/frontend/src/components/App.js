@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom" 
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
 
-import UsersList from "../components/usersList/usersList";
+import UsersList from "../components/usersList/UsersList";
+import NotFound from "../components/NotFound/NotFound";
+import AddUser from "../components/AddUser/AddUser";
 
 class App extends React.Component {
   apiURL = "http://localhost:8000/api/users/";
@@ -35,20 +37,47 @@ class App extends React.Component {
       method: "DELETE",
     })
       .then((response) => {
-          this.updateService();
+        this.updateService();
         console.log(response);
       })
       .catch((err) => console.log(err.message));
   };
 
+  
+
   render() {
     // console.log("State => ", this.state.UsersList)
     return (
       <Fragment>
-        <UsersList
-          UsersList={this.state.UsersList}
-          onDeleteItem={this.onDeleteItem}
-        />
+        <Router>
+          <Switch>
+            <Route
+                path = "/"
+                exact
+                render = {()=>(
+                <UsersList
+                  UsersList={this.state.UsersList}
+                  onDeleteItem={this.onDeleteItem}
+                />
+                )}
+            />
+            <Route
+                path = "/AddUser"
+                exact
+                render = {()=>(
+                <AddUser />
+                )}
+            />
+            <Route
+                path = "*"
+                exact
+                render = {()=>(
+                <NotFound />
+                )}
+            />
+          </Switch>
+        </Router>
+        
       </Fragment>
     );
   }
