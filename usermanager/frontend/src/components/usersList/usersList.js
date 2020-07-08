@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //Component
 import UserItem from "./UserItem/UserItem";
 
-const UsersList = ({ UsersList, onDeleteItem }) => {
+const UsersList = ({ UsersList, onDeleteItem , onEditItem}) => {
   const item = UsersList.map((item) => {
     // console.log("Item => ", item)
     return (
@@ -16,6 +16,7 @@ const UsersList = ({ UsersList, onDeleteItem }) => {
         message={item.message}
         created_at={item.created_at}
         onDeleteItem={() => onDeleteItem(item.id)}
+        onEditItem={() => onEditItem(item.id)}
       />
     );
   });
@@ -34,6 +35,7 @@ const UsersList = ({ UsersList, onDeleteItem }) => {
             <th>Email</th>
             <th>Message</th>
             <th>Delete</th>
+            <th>Edit</th>
           </tr>
         </thead>
         {item}

@@ -7,10 +7,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UsersList from "../components/usersList/UsersList";
 import NotFound from "../components/NotFound/NotFound";
 import AddUser from "../components/AddUser/AddUser";
+import EditUser from "../components/EditUser/EditUser";
 
 class App extends React.Component {
   apiURL = "http://localhost:8000/api/users/";
-
+  api = "";
+  contact = {};
   state = {
     UsersList: [],
   };
@@ -43,7 +45,24 @@ class App extends React.Component {
       .catch((err) => console.log(err.message));
   };
 
-  
+  onEditItem = (id) => {
+    fetch(this.apiURL + id, {
+      method: "GET",
+    })
+      .then((response) => {
+        this.updateService();
+        console.log(response);
+      })
+      .catch((err) => console.log(err.message));
+
+    let res = this.state.List;
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].id == id) {
+        this.contact = res[i];
+      }
+    }
+    this.api = this.apiURL + id;
+  };
 
   render() {
     // console.log("State => ", this.state.UsersList)
@@ -52,32 +71,32 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route
-                path = "/"
-                exact
-                render = {()=>(
+              path="/"
+              exact
+              render={() => (
                 <UsersList
                   UsersList={this.state.UsersList}
                   onDeleteItem={this.onDeleteItem}
+                  onEditItem={this.onEditItem}
                 />
-                )}
+              )}
             />
+            <Route path="/AddUser" exact render={() => <AddUser />} />
             <Route
-                path = "/AddUser"
-                exact
-                render = {()=>(
-                <AddUser />
-                )}
+              path="/EditUser"
+              exact
+              render={() => (
+                <EditUser
+                  UsersList={this.state.UsersList}
+                  updateService={this.updateService}
+                  contact={this.contact}
+                  api={this.api}
+                />
+              )}
             />
-            <Route
-                path = "*"
-                exact
-                render = {()=>(
-                <NotFound />
-                )}
-            />
+            <Route path="*" exact render={() => <NotFound />} />
           </Switch>
         </Router>
-        
       </Fragment>
     );
   }

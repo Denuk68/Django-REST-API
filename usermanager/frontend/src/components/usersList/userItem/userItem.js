@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class UserItem extends React.Component {
   state = {
@@ -6,11 +7,10 @@ class UserItem extends React.Component {
     name: this.props.name,
     email: this.props.email,
     message: this.props.message,
-    created_at: this.props.created_at,
   };
 
   render() {
-    const { id, name, email, message, created_at } = this.state;
+    const { id, name, email, message } = this.state;
     return (
       <tbody>
         <tr className="priority-200">
@@ -22,6 +22,13 @@ class UserItem extends React.Component {
             <button className="delete-btn" onClick={this.props.onDeleteItem}>
               <i className="fas fa-trash-alt" title="delete row"></i>
             </button>
+          </td>
+          <td className="edit">
+            <Link to="/EditUser">
+              <button className="edit-btn" onClick={this.props.onEditItem}>
+                <i className="fas fa-edit"></i>
+              </button>
+            </Link>
           </td>
         </tr>
       </tbody>

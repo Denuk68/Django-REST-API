@@ -124,6 +124,26 @@ table tbody tr.priority-600 td .fa-circle {
 table tbody tr:hover .delete-btn {
     opacity: 1;
 }
+.edit-btn {
+    cursor: pointer;
+    background-color: var(--delete-background);
+    background-color: transparent;
+    border: 0;
+    border-radius: 0.125rem;
+    color: var(--delete-color);
+    font-size: 1.1rem;
+    opacity: 0.2;
+    padding: 0.3125rem 0.625rem;
+}
+.edit-btn:hover {
+    color: orange;
+}
+.edit-btn:focus {
+  outline: 0;
+}
+table tbody tr:hover .edit-btn {
+    opacity: 1;
+}
 /* End Table Styles */
 /* END OUTER CONTAINER STYLES */
 

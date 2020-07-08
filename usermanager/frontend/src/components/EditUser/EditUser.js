@@ -1,11 +1,12 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-class AddUser extends React.Component {
+class EditUser extends React.Component {
   state = {
-    name: null,
-    email: null,
-    message: null,  
+    id: this.props.id,
+    name: this.props.name,
+    email: this.props.email,
+    message: this.props.message,  
   };
 
   getName = (event) => {
@@ -28,7 +29,7 @@ class AddUser extends React.Component {
 
   onSendData = (event) => {
     fetch("http://localhost:8000/api/users/", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -40,7 +41,7 @@ class AddUser extends React.Component {
       }),
     }).catch((err) => console.log(err.message));
 
-    alert(this.state.name + " було додано до списку!");
+    alert(this.state.name + " було змінено !");
   };
 
   render() {    
@@ -67,7 +68,7 @@ class AddUser extends React.Component {
             onChange={this.getMessage}
           />
           <button className="btn btn-success" type="submit">
-            Add new user
+            Change  user
           </button>
         </form>
         <Link to="/" className="btn btn-link">
@@ -78,4 +79,4 @@ class AddUser extends React.Component {
   }
 }
 
-export default AddUser;
+export default EditUser;
