@@ -7,57 +7,62 @@ class EditUser extends React.Component {
     name: this.props.data.name,
     email: this.props.data.email,
     message: this.props.data.message,
+    formIsValid:true
   };
 
-  getName = (event) => {
+  getName = this.getName.bind(this);
+  getEmail = this.getEmail.bind(this);
+  getMessage = this.getMessage.bind(this);
+
+  getName(event) {
     this.setState({
       name: event.target.value,
     });
   };
 
-  getEmail = (event) => {
+  getEmail (event) {
     this.setState({
       email: event.target.value,
-    });
+    });   
   };
 
-  getMessage = (event) => {
+  getMessage(event) {
     this.setState({
       message: event.target.value,
     });
   };
 
-  onSendData = (event) => {  
-    // event.preventDefault();
-    fetch("http://localhost:8000/api/users/" ,{
+  onSendData = (event) => {
+      fetch("http://localhost:8000/api/users/" + this.state.id +"/" ,{
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Accept : "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        id: this.props.id,
         name: this.state.name,
         email: this.state.email,
         message: this.state.message,
-      }),      
-    }).catch((err) => console.log(err.message));     
+      }),
+    }).catch((err) => console.log(err.message));
+    
   };
 
-  render() {     
-    // console.log("Props =>", this.props);     
+  render() {
+    // console.log("Props =>", this.props);
+    console.log(this.state.name)
     return (
       <div className="AddUser">
         <form onSubmit={this.onSendData}>
           <input
-            type="text"                        
+            type="text"
             className="form-control"
-            value = {this.state.name}
+            value={this.state.name}
             onChange={this.getName}
           />
           <input
-            type="text"            
-            value = {this.state.email}
+            type="text"
+            value={this.state.email}
             className="form-control"
             onChange={this.getEmail}
           />
