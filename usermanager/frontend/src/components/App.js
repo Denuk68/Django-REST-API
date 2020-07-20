@@ -1,38 +1,36 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
+// Components
+import Users from "../components/user/User";
+import Alert from "./alert/alert";
+
+// Redux
+import { Provider } from "react-redux";
+import store from "../store";
+
+const options = {
+  // you can also just use 'bottom center'
+  position: "top center",
+  timeout: 5000,
+  offset: "30px",
+  // you can also just use 'scale'
+  transition: "scale",
+};
 
 class App extends React.Component {
-    render() {
-        return (
-            <Fragment>
-                <div className="outer-container">
-                    <h1>User manager table</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Message</th>                             
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="priority-200">
-                                <td className="name">TESmart KVM Switch HDMI Device</td>
-                                <td className="clicks">857</td>
-                                <td className="priority"><i className="fas fa-circle"></i> 200</td>
-                                <td className="impressions">190</td>
-                                <td className="delete"><button className="delete-btn"><i className="fas fa-trash-alt" title="delete row"></i></button></td>
-                            </tr>                            
-                        </tbody>
-                    </table>
-                </div>
-            </Fragment>
-        )
-
-    }
-
+  render() {
+    return (
+      <Provider store={store}>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <Users />
+          <Alert />
+        </AlertProvider>
+      </Provider>
+    );
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
