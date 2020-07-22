@@ -3,4 +3,4 @@ export const DELETE_USER = "DELETE_USER";
 export const ADD_USER = "ADD_USER";
 export const CREATE_MESSAGE = "CREATE_MESSAGE"; 
 export const GET_ERRORS = "GET_ERRORS";
-export const CURRENT_USER = "CURRENT_USER";
+export const LOAD_USER = "LOAD_USER";

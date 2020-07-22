@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USERS, DELETE_USER, ADD_USER ,CURRENT_USER } from "./actions";
+import { GET_USERS, DELETE_USER, ADD_USER, LOAD_USER } from "./actions";
 import { returnErrors, createMessage } from "./messages";
 
 export const getUsers = () => (dispatch) => {
@@ -46,9 +46,9 @@ export const addUser = (user) => (dispatch) => {
 };
 
 
-export const currentUser = (user) => (dispatch) => {
+export const fillFields  = (user) => (dispatch) => {
   dispatch({
-        type: CURRENT_USER,
+        type: LOAD_USER,
         payload: user,
       });  
 };

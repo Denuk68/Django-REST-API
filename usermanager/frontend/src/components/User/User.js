@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 //Components
 import AddUserForm from "./AddUserForm";
@@ -8,7 +9,7 @@ import AddUserForm from "./AddUserForm";
 
 //Actions
 import { getUsers, deleteUser } from "../../actions/users";
-import { Link } from "react-router-dom";
+
 
 class Users extends React.Component {
   static propTypes = {
@@ -22,14 +23,13 @@ class Users extends React.Component {
   getSingleUser = (id) => {  
     const index = this.props.users.findIndex(
       (element) => element.id === id
-    );  
-    console.log("id =", id);
+    );      
     const singleUser = this.props.users[index];
     console.log("singleUser =>" , singleUser)
   }
 
   render() {
-    const { users, deleteUser } = this.props;
+    const { users, deleteUser, } = this.props;
     return (
       <Fragment>
         <div className="outer-container">

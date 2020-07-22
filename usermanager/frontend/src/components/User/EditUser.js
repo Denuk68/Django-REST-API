@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-//Actions
-import { currentUser } from "../../actions/users";
+
 
 
 
@@ -70,11 +69,6 @@ class EditUser extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-    console.log("EditUser state: ", state);
-    return {
-        singleUser: state.users.singleUser
-    };
-  };
 
-export default connect(mapStateToProps, { currentUser })(EditUser);
+
+export default connect(null)(EditUser);

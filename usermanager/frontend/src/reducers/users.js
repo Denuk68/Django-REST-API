@@ -2,12 +2,12 @@ import {
   GET_USERS,
   DELETE_USER,
   ADD_USER,
-  CURRENT_USER,
+  LOAD_USER,
 } from "../actions/actions";
 
 const initialState = {
   users: [],
-  singleUser: [],
+  currentUser: null,
 };
 
 export default function (state = initialState, action) {
@@ -27,11 +27,12 @@ export default function (state = initialState, action) {
         ...state,
         users: [...state.users, action.payload],
       };
-    case CURRENT_USER:
+    case LOAD_USER:
+      const currentUser = action.payload;
       return {
         ...state,
-        singleUser: [...state.singleUser, action.payload],
-      };
+        currentUser,
+      };      
     default:
       return state;
   }
