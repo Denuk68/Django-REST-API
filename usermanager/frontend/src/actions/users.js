@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USERS, DELETE_USER, ADD_USER } from "./actions";
+import { GET_USERS, DELETE_USER, ADD_USER ,CURRENT_USER } from "./actions";
 import { returnErrors, createMessage } from "./messages";
 
 export const getUsers = () => (dispatch) => {
@@ -43,4 +43,12 @@ export const addUser = (user) => (dispatch) => {
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+
+export const currentUser = (user) => (dispatch) => {
+  dispatch({
+        type: CURRENT_USER,
+        payload: user,
+      });  
 };

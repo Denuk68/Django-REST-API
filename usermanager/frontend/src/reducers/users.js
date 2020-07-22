@@ -1,7 +1,13 @@
-import { GET_USERS, DELETE_USER, ADD_USER } from "../actions/actions";
+import {
+  GET_USERS,
+  DELETE_USER,
+  ADD_USER,
+  CURRENT_USER,
+} from "../actions/actions";
 
 const initialState = {
   users: [],
+  singleUser: [],
 };
 
 export default function (state = initialState, action) {
@@ -19,8 +25,13 @@ export default function (state = initialState, action) {
     case ADD_USER:
       return {
         ...state,
-        users:[...state.users, action.payload]
-      }
+        users: [...state.users, action.payload],
+      };
+    case CURRENT_USER:
+      return {
+        ...state,
+        singleUser: [...state.singleUser, action.payload],
+      };
     default:
       return state;
   }

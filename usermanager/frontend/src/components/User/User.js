@@ -2,9 +2,13 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+//Components
 import AddUserForm from "./AddUserForm";
 
+
+//Actions
 import { getUsers, deleteUser } from "../../actions/users";
+import { Link } from "react-router-dom";
 
 class Users extends React.Component {
   static propTypes = {
@@ -13,6 +17,15 @@ class Users extends React.Component {
 
   componentDidMount() {
     this.props.getUsers();
+  }
+
+  getSingleUser = (id) => {  
+    const index = this.props.users.findIndex(
+      (element) => element.id === id
+    );  
+    console.log("id =", id);
+    const singleUser = this.props.users[index];
+    console.log("singleUser =>" , singleUser)
   }
 
   render() {
@@ -28,7 +41,8 @@ class Users extends React.Component {
                 <th>name</th>
                 <th>email</th>
                 <th>message</th>
-                <th></th>
+                <th>delete</th>
+                <th>edit</th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +59,16 @@ class Users extends React.Component {
                     >
                       <i className="fas fa-trash-alt" title="delete row"></i>
                     </button>
+                  </td>
+                  <td className="edit">
+                    <Link to="/edit">
+                      <button 
+                      className="delete-btn"
+                      onClick = {this.getSingleUser.bind(this, user.id)}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
